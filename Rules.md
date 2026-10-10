@@ -210,7 +210,7 @@ Quando duas regras parecerem incompatíveis:
 
 #### PixelCopy / Eternal Guide — `Alan-uai/PixelCopy`
 
-- Consulte também `docs/ai-rules.md`, referenciado pelo `AGENTS.md`, antes de editar.
+- Consulte também `docs/ai-rules.md`, referenciado pelo `AGENTS.md`, antes de editar. Esse documento impõe escopo estrito, proíbe alterações não solicitadas e exige investigação metódica de falhas recorrentes.
 - Preserve o modelo de dados do Supabase, os tipos manuais em `src/supabase/client.ts` e as migrations existentes.
 - Não presuma que o build valida TypeScript ou ESLint: o projeto pode ignorar ambos; use os comandos específicos de lint e typecheck.
 - Preserve a separação entre endpoint simples de chat, cliente OpenRouter com fallback/tool calling e dados estáticos de fallback.
@@ -279,7 +279,7 @@ Um repositório, `Hashzin-0/codespaces-blank`, está vazio e não possui árvore
 |---|---|---|
 | `Alan-uai/PixelFandom` | `AGENTS.md`, `docs/ai-rules.md` | Lidos |
 | `Alan-uai/Melopo-sis` | `AGENTS.md` | Lido |
-| `Alan-uai/PixelCopy` | `AGENTS.md` | Lido; aponta para `docs/ai-rules.md` |
+| `Alan-uai/PixelCopy` | `AGENTS.md`, `docs/ai-rules.md` | Ambos lidos |
 | `Alan-uai/Datafy` | `rules.md` | Lido |
 | `Alan-uai/Datafycopy` | `rules.md`, `src/rules.md` | Ambos lidos |
 | `Hashzin-0/N-simple` | `AGENTS.md` | Lido |
@@ -307,4 +307,4 @@ A expressão “sem arquivos-alvo encontrados” significa que nenhum arquivo co
 - [ ] Registrei arquivos-ponte quebrados e repositórios vazios como limitações.
 - [ ] Não afirmei que todo o código-fonte foi revisado linha a linha.
 
-**Limitações remanescentes:** a referência `Alan-uai/PixelCopy/docs/ai-rules.md` é apontada pelo `AGENTS.md`, mas seu conteúdo não foi recuperado nesta atualização. Também não foram auditadas branches não padrão, arquivos externos ou regras com nomes não contemplados na busca. Antes de editar qualquer projeto, reabra a fonte local atual, pois os arquivos podem mudar após esta compilação.
+**Limitações remanescentes:** não foram auditadas branches não padrão, arquivos externos ou instruções com nomes não contemplados na busca. A varredura focou em nomes de arquivos de regras e na leitura dos documentos localizados, não em uma revisão de todo o código-fonte. Antes de editar qualquer projeto, reabra a fonte local atual, pois os arquivos podem mudar após esta compilação.
