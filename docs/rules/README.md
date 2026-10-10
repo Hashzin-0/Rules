@@ -37,6 +37,7 @@ Fonte normativa: [Rules.md](../../Rules.md). Estes guias ampliam a aplicação p
 - [18 — Testes, validação e CI](18-plano-de-testes-e-ci.md)
 - [19 — Modelos de IA e avaliação](19-modelos-e-avaliacao.md)
 - [20 — Testes executáveis do validador](20-testes-do-validador.md)
+- [21 — Blueprint HTTP testável com Node.js](21-blueprint-http-testavel.md)
 
 ## Como usar
 
