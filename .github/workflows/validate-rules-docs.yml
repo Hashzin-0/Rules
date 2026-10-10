@@ -1,0 +1,26 @@
+name: Validate rules documentation
+on:
+  pull_request:
+    paths:
+      - "Rules.md"
+      - "docs/rules/**"
+      - "scripts/validate-rules-docs.mjs"
+      - ".github/workflows/validate-rules-docs.yml"
+  push:
+    branches: [main]
+    paths:
+      - "Rules.md"
+      - "docs/rules/**"
+      - "scripts/validate-rules-docs.mjs"
+      - ".github/workflows/validate-rules-docs.yml"
+jobs:
+  validate-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/validate-rules-docs.mjs
