@@ -215,36 +215,74 @@ As regras abaixo são ativadas pelo **tipo de produto e pelo fluxo que está sen
 - Mantenha estados transacionais claros: pendente, confirmado, falhou, cancelado ou reembolsado, conforme o domínio. Não informe sucesso antes da confirmação da fonte de verdade.
 - Preserve histórico e rastreabilidade de operações importantes, evitando armazenar dados pessoais além do necessário.
 
-### 13.11. Como decidir quais regras aplicar
+### 13.11. Classificador operacional: identificar e ativar as regras
 
-1. Identifique a finalidade real da aplicação pela implementação, fluxos, dados e documentação; o nome do repositório ou um README genérico não é evidência suficiente.
-2. Aplique apenas as categorias relevantes ao componente ou fluxo alterado. Um produto pode combinar, por exemplo, perfil profissional, IA e exportação de documentos.
-3. Se o repositório tiver uma regra local mais restritiva, ela prevalece sobre a orientação genérica desta seção.
-4. Quando a finalidade ainda não puder ser confirmada, trate a categoria como hipótese, verifique a implementação e não acrescente requisitos de produto sem evidência.
-5. Os nomes dos repositórios-fonte ficam no catálogo de auditoria para rastreabilidade, não como títulos das regras operacionais.
+Antes de planejar ou executar qualquer criação, edição, revisão técnica ou análise de projeto, determine as categorias aplicáveis usando evidências do repositório. Não classifique apenas pelo nome ou pela descrição promocional.
 
-## 14. Resolução de conflitos
+#### Etapa A — Reunir sinais
 
-Quando duas regras parecerem incompatíveis:
+Examine, na medida do escopo e do acesso disponível:
 
-1. Respeite segurança, privacidade e limites explícitos de autorização.
-2. Siga a instrução direta e atual do usuário dentro desses limites.
-3. Siga as regras do repositório e do diretório-alvo, incluindo exigências específicas da stack.
-4. Prefira a alternativa que preserve dados, compatibilidade e comportamento existente.
-5. Se o conflito continuar material e não puder ser resolvido com segurança, pergunte antes de alterar.
+1. README/documentação, manifesto e scripts de execução;
+2. estrutura de diretórios, rotas, páginas e componentes;
+3. dependências e SDKs;
+4. modelos de dados, migrations, schemas e contratos de API;
+5. fluxos implementados, testes e integrações reais;
+6. instruções locais como `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `Rules.md`, `rules.md`, skills e instruções do editor.
 
-## 15. Checklist antes de entregar
+A documentação é um sinal, não prova suficiente se contradisser a implementação. Um starter README genérico não determina a categoria. Nunca deduza uma funcionalidade apenas porque ela aparece no backlog ou em uma ideia.
 
-- [ ] Li as instruções aplicáveis e os documentos por elas referenciados.
-- [ ] Mantive o escopo solicitado e protegi arquivos de ambiente e segredos.
-- [ ] Reutilizei os componentes e serviços existentes quando apropriado.
-- [ ] Validei entradas e autorizações no servidor.
-- [ ] Atualizei SQL/migrations e documentação, se necessário.
-- [ ] Tratei erros e estados de interface relevantes.
-- [ ] Executei as verificações adequadas e relatei os resultados reais.
-- [ ] Listei as alterações e as limitações restantes.
+#### Etapa B — Pontuar evidências por categoria
 
-## 16. Regras adicionais consolidadas a partir da varredura
+Para cada categoria da seção 13, classifique a evidência:
+
+- **Confirmada:** existem fluxos implementados, código, dados ou integrações diretamente relacionados.
+- **Provável:** há documentação específica e dependências coerentes, mas a implementação não foi confirmada.
+- **Não demonstrada:** há apenas nome, intenção futura, exemplo genérico ou evidência insuficiente.
+- **Incompatível:** a arquitetura observada contradiz a categoria.
+
+Ative regras especializadas apenas para categorias **confirmadas**. Para categorias prováveis, inspecione mais ou aplique apenas a precaução genérica que não introduza arquitetura nova. Não aplique categorias não demonstradas ou incompatíveis.
+
+#### Etapa C — Usar sinais concretos
+
+| Categoria | Sinais fortes de confirmação |
+|---|---|
+| Currículos/portfólios | Campos de experiência profissional, formação, habilidades, templates de CV, exportação de currículo ou perfil público profissional. |
+| Educação/pesquisa científica | Cursos, aulas, quizzes, simulados, cálculo didático, referências bibliográficas, indexação de artigos ou geração de texto acadêmico. |
+| IA/RAG/voz | Chamadas reais a modelos, prompts, recuperação de documentos, embeddings, tools/function calling, streaming de áudio ou vídeo. |
+| Edição/tradução de mídia | Pipeline de OCR/tradução, canvas/editor, composição de imagem, conversão de documentos, renderização ou processamento de áudio/vídeo. |
+| Workspace/painel configurável | Widgets/colunas reorganizáveis, preferências salvas, dashboards, páginas configuráveis ou múltiplos espaços de trabalho. |
+| Bots/automação de mensagens | SDK de Discord/chat, webhooks, comandos, eventos, filas de mensagens ou tarefas agendadas com efeitos externos. |
+| Registry/devtools/MCP | Manifestos de plugins/skills, descoberta e execução de tools, MCP servers, operações de repositório ou executor de scripts. |
+| Geoespacial | Coordenadas, mapas, geocoding, geofencing, camadas geográficas ou cálculo de rotas. |
+| Editor visual/3D | Canvas de edição, catálogos de efeitos, WebGL/Three.js, timeline, presets, slots ou renderizadores de efeitos. |
+| Comércio/comunidade | Catálogo, carrinho, checkout, preços/estoque, publicações de usuários, comentários ou moderação. |
+
+Um projeto pode corresponder a diversas categorias. Exemplo: um criador de currículos com IA e exportação PDF ativa as regras de currículos, IA e transformação de documentos, cada uma somente no fluxo relevante.
+
+#### Etapa D — Definir escopo por tarefa
+
+1. Identifique o recurso solicitado e o caminho de execução que será afetado.
+2. Ative regras gerais sempre; ative as regras especializadas confirmadas que impactam esse caminho.
+3. Verifique conflitos com instruções locais. A regra local mais específica e válida prevalece, salvo conflito com segurança ou instrução de prioridade superior.
+4. Se uma regra local proibir alteração, não a contorne; solicite esclarecimento/autorização quando necessário.
+5. Não adicione requisitos de produto, dependências, serviços ou arquitetura que o pedido e o código não sustentem.
+
+#### Etapa E — Registrar a classificação no plano de trabalho
+
+Antes de mudanças não triviais, registre de forma breve:
+- finalidade observada e evidências usadas;
+- categorias ativadas e por que se aplicam;
+- categorias relevantes consideradas, mas não ativadas, por falta de evidência;
+- instruções locais que restringem a mudança;
+- verificações necessárias para validar o resultado.
+
+Em pedidos simples, essa classificação pode permanecer interna; não sobrecarregue a resposta com relatório desnecessário. Nunca afirme ter inspecionado arquivos, branches, testes ou integrações aos quais não teve acesso.
+
+#### Etapa F — Reavaliar
+
+Se a inspeção revelar uma finalidade diferente da presumida, reclassifique antes de prosseguir. Se o projeto for um scaffold, protótipo ou repositório incompleto, declare essa limitação e não trate recursos planejados como implementados.
+
 
 ### Escopo de alteração e proteção do estado existente
 
