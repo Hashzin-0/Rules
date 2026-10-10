@@ -34,6 +34,7 @@ const requiredGuideFiles = [
   "16-blueprints-reutilizaveis.md",
   "17-mcps-skills-assets-e-workflows.md",
   "18-plano-de-testes-e-ci.md",
+  "19-modelos-e-avaliacao.md",
 ];
 
 for (const expected of requiredGuideFiles) {
