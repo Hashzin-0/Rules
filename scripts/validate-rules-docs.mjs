@@ -35,6 +35,7 @@ const requiredGuideFiles = [
   "17-mcps-skills-assets-e-workflows.md",
   "18-plano-de-testes-e-ci.md",
   "19-modelos-e-avaliacao.md",
+  "20-testes-do-validador.md",
 ];
 
 for (const expected of requiredGuideFiles) {
