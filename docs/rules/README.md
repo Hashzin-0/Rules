@@ -1,59 +1,57 @@
-# Guia técnico de implementação das regras
+# Documentação detalhada das regras
 
-Este diretório expande as regras de `Rules.md` em guias operacionais. O documento principal continua sendo a fonte normativa resumida; os guias detalham decisões técnicas, implementações, alternativas, limites, referências e validação.
+Fonte normativa: [Rules.md](../../Rules.md). Estes guias ampliam a aplicação prática das regras, sem substituir instruções específicas de cada projeto.
 
-## Método e critérios
+## Guias por regra
 
-- **Verificado**: apoiado por documentação oficial, código-fonte do projeto referenciado ou comportamento reproduzível.
-- **Recomendação contextual**: prática útil, mas que depende de stack, escala, ameaça e requisitos do produto.
-- **Exemplo ilustrativo**: código de referência que deve ser adaptado e testado no repositório real.
-- **Não presumir**: modelos, serviços, variáveis de ambiente, SDKs, APIs, features e resultados não são considerados existentes até serem verificados.
-- Links e versões devem ser revalidados antes de uma migração ou lançamento; documentação de framework muda.
+- [01 — Hierarquia e instruções](01-hierarquia-instrucoes.md)
+- [02 — Escopo, fidelidade e comunicação](02-escopo-fidelidade-comunicacao.md)
+- [03 — Arquitetura e modularidade](03-arquitetura-modularidade.md)
+- [04 — Tipagem e validação](04-tipagem-validacao.md)
+- [05 — Segurança e segredos](05-seguranca-segredos.md)
+- [06 — Banco, Supabase e SQL](06-banco-supabase-sql.md)
+- [07 — APIs e resiliência](07-apis-integracoes-resiliencia.md)
+- [08 — UI, design system e acessibilidade](08-ui-design-system-acessibilidade.md)
+- [09 — Dados dinâmicos e configuração](09-dados-dinamicos-configuraveis.md)
+- [10 — Performance e escalabilidade](10-performance-escalabilidade.md)
+- [11 — Testes e verificação](11-validacao-automatizada.md)
+- [12 — Organização e documentação](12-organizacao-documentacao.md)
+- [13.1 — Currículos e portfólios](13-01-curriculos-portfolios.md)
+- [13.2 — Educação e pesquisa científica](13-02-educacao-pesquisa-cientifica.md)
+- [13.3 — IA, RAG, voz e multimodalidade](13-03-ia-rag-voz-multimodal.md)
+- [13.4 — Transformação de mídia e documentos](13-04-transformacao-midia-documentos.md)
+- [13.5 — Dashboards e workspaces](13-05-dashboards-workspaces.md)
+- [13.6 — Bots e automações](13-06-bots-automacoes.md)
+- [13.7 — Devtools, registries e MCPs](13-07-devtools-registries-mcp.md)
+- [13.8 — Geoespacial e localização](13-08-geoespacial-localizacao.md)
+- [13.9 — Editores visuais e 3D](13-09-editores-visuais-3d.md)
+- [13.10 — Comércio e comunidade](13-10-comercio-comunidade.md)
+- [13.11 — Classificador operacional](13-11-classificador-operacional.md)
 
-## Mapa dos guias
+## Catálogos transversais
 
-### Regras gerais
-| Regra | Guia | Cobertura |
-|---|---|---|
-| 1 | [Hierarquia e leitura obrigatória](01-hierarquia-instrucoes.md) | Precedência, instruções locais, confiança e resolução de conflitos |
-| 2 | [Fidelidade, escopo e comunicação](02-escopo-fidelidade-comunicacao.md) | Critérios de aceitação, alterações mínimas, autorização e relatório |
-| 3 | [Arquitetura e modularidade](03-arquitetura-modularidade.md) | Limites, dependências, reutilização, composição e organização |
-| 4 | [Tipagem e validação](04-tipagem-validacao.md) | TypeScript, schemas, validação em runtime e testes |
-| 5 | A publicar | Segurança e gestão de segredos |
-| 6 | A publicar | Banco de dados, Supabase e SQL |
-| 7 | A publicar | APIs, integrações e resiliência |
-| 8 | A publicar | UI, design system e acessibilidade |
-| 9 | A publicar | Dados dinâmicos e conteúdo configurável |
-| 10 | A publicar | Performance e escalabilidade |
-| 11 | A publicar | Testes e verificação |
-| 12 | A publicar | Organização e documentação |
-| 13.1–13.10 | A publicar | Guias por tipo de aplicação |
-| 13.11 | A publicar | Classificador operacional e evidências |
+- [14 — Matriz de tecnologias por regra](14-matriz-tecnologias-por-regra.md)
+- [15 — APIs, modelos e variáveis de ambiente](15-catalogo-apis-modelos-variaveis.md)
+- [16 — Blueprints reutilizáveis](16-blueprints-reutilizaveis.md)
+- [17 — MCPs, Skills, assets e workflows](17-mcps-skills-assets-e-workflows.md)
+- [18 — Testes, validação e CI](18-plano-de-testes-e-ci.md)
 
-## Template mínimo exigido para cada guia
+## Como usar
 
-Cada guia deve conter: objetivo e escopo; decisões de uso e não uso; fluxo de implementação; arquitetura modular; tecnologias e alternativas; APIs/modelos/SDKs com links oficiais; configuração e nomes de variáveis (nunca valores secretos); exemplos positivos e antipadrões; responsividade/renderização quando pertinentes; segurança; desempenho/custo; acessibilidade quando pertinente; tratamento de falhas; testes unitários, integração e E2E; scripts de lint/typecheck/build/validação; checklist de aceite; troubleshooting; projetos reais de referência; fontes primárias e data de revisão.
+1. Leia Rules.md e as instruções locais do projeto.
+2. Identifique regras gerais e categorias confirmadas por evidências.
+3. Consulte a matriz tecnológica e o catálogo de APIs antes de escolher dependências.
+4. Use blueprints como ponto de partida, adaptando-os à stack e à versão instaladas.
+5. Execute as verificações aplicáveis e registre resultados reais.
 
-## Comandos de validação
+## Estado e limites
 
-Os comandos abaixo são exemplos e devem ser adaptados aos scripts e ferramentas realmente presentes no repositório:
+Os catálogos são referências de decisão, não uma lista obrigatória de dependências. IDs de modelos, APIs, limites, versões e preços devem ser revalidados na documentação oficial antes de implementar. Exemplos de código não são declarados como testados apenas por estarem documentados.
 
-```bash
-git diff --check
-git status --short
-# Inspecione package.json, pyproject.toml, Makefile ou equivalente antes de executar.
-npm run lint --if-present
-npm run typecheck --if-present
-npm test --if-present
-npm run build --if-present
-```
+Validação local: node scripts/validate-rules-docs.mjs
 
-Não execute todos os comandos cegamente: confirme o gerenciador de pacotes, os scripts definidos e os efeitos de cada comando. Nunca altere arquivos `.env*` existentes sem autorização explícita.
+## Referências
 
-## Referências transversais
-
-- [GitHub Actions: Continuous Integration](https://docs.github.com/en/actions/get-started/continuous-integration)
-- [OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org/)
-- [W3C WAI: Standards and Guidelines](https://www.w3.org/WAI/standards-guidelines/)
-- [MDN Web Docs](https://developer.mozilla.org/)
-- [Google SRE Books](https://sre.google/books/)
+- Rules.md: https://github.com/Hashzin-0/Rules/blob/main/Rules.md
+- OpenAPI: https://spec.openapis.org/oas/latest.html
+- OWASP ASVS: https://github.com/OWASP/ASVS
