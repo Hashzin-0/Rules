@@ -36,6 +36,7 @@ const requiredGuideFiles = [
   "18-plano-de-testes-e-ci.md",
   "19-modelos-e-avaliacao.md",
   "20-testes-do-validador.md",
+  "21-blueprint-http-testavel.md",
 ];
 
 for (const expected of requiredGuideFiles) {
