@@ -119,27 +119,109 @@
 - Não crie documentação duplicada quando um documento existente puder ser atualizado.
 - Preserve a rastreabilidade: informe arquivos alterados, razão da mudança, validações executadas e riscos restantes.
 
-## 13. Regras específicas observadas nos repositórios-fonte
+## 13. Regras específicas por tipo de aplicação
 
-### PixelFandom — `Alan-uai/PixelFandom`
+As regras abaixo são ativadas pelo **tipo de produto e pelo fluxo que está sendo alterado**, não pelo nome histórico do repositório. Uma aplicação pode pertencer a mais de uma categoria. Aplique somente as categorias compatíveis com o código e com a funcionalidade em questão; não presuma recursos que o produto ainda não implementa.
 
-- O sistema deve aceitar entradas em linguagem natural e normalizar internamente slugs e identificadores, sem exigir que o usuário conheça convenções técnicas.
-- Configurações críticas de IA, prompts de sistema, provedores, parâmetros de inferência e chaves são de controle do desenvolvedor; personalizações do usuário devem usar opções predefinidas e validadas.
-- Conteúdo customizado deve usar schemas e sanitização server-side; não permitir HTML/JS arbitrário nem protocolos perigosos em URLs.
-- Reutilize hooks, componentes, catálogos e utilitários já existentes.
-- Arquivos `.env*` são protegidos contra alterações.
-- A documentação do projeto aponta `docs/ai-rules.md` como regra estrita adicional; consulte-a antes de alterar o projeto.
+### 13.1. Construtores de currículos, portfólios e perfis profissionais
 
-### Curion — `Hashzin-0/Curion`
+- Preserve a distinção entre dados factuais fornecidos pela pessoa, sugestões geradas por IA e conteúdo efetivamente confirmado pelo usuário. Nunca invente empregos, diplomas, habilidades, métricas ou resultados profissionais.
+- Permita revisar e editar o conteúdo antes de exportar ou publicar; mantenha os dados estruturados separados dos temas visuais.
+- Ao gerar PDF ou página pública, valide quebras de página, legibilidade, links, hierarquia visual e consistência entre pré-visualização e arquivo final.
+- Ofereça modelos adaptáveis à área profissional sem sacrificar legibilidade, acessibilidade ou leitura por sistemas de recrutamento quando esse uso for esperado.
+- Trate telefone, e-mail, histórico profissional e outros dados pessoais como privados por padrão. Torne explícitos publicação, compartilhamento, expiração e exclusão de perfis públicos.
+- Preserve a correspondência entre os campos editáveis, o estado salvo, a pré-visualização e a exportação; não permita que uma atualização visual apague conteúdo já preenchido.
 
-- Modularize por responsabilidade e mantenha arquitetura desacoplada.
-- Centralize lógica de negócio fora da UI e use serviços para APIs e banco.
-- Prefira tipagem rigorosa, schemas e validação de entrada.
-- Toda alteração que afete Supabase deve vir acompanhada do SQL/RLS ou migration relacionado.
-- Use OpenRouter como provedor padrão de geração de texto neste projeto; exceções de áudio seguem as regras locais.
-- Respeite a regra local de modo somente leitura quando o usuário proibir edições.
+### 13.2. Aplicações educacionais, tutores, pesquisa e ferramentas científicas
 
-> Estas regras específicas são extraídas de documentos localizados nos repositórios citados; não devem ser interpretadas como especificações universais de todos os projetos.
+- Separe material didático, resposta gerada, cálculo determinístico e evidência externa. Não apresente conteúdo produzido por IA como fonte primária ou fato verificado.
+- Para respostas acadêmicas, mantenha referências rastreáveis e associe cada afirmação relevante à fonte que a sustenta; identifique quando a fonte não foi encontrada ou não foi possível verificá-la.
+- Em calculadoras técnicas, mantenha fórmulas em funções testáveis fora da UI, mostre unidades, entradas, hipóteses, etapas de cálculo e limites de validade. Não substitua resultados reais por números de demonstração sem indicação explícita.
+- Em quizzes, simulados e avaliação de respostas, diferencie gabarito, critérios de correção, feedback pedagógico e grau de confiança. Explique erros sem alterar silenciosamente a resposta original do estudante.
+- Em pesquisa semântica ou RAG, combine relevância lexical e semântica quando apropriado, preserve a proveniência dos trechos e evite considerar títulos semelhantes como prova de relevância. Diferencie “nenhum resultado encontrado” de timeout, rate limit, falha de autenticação ou indisponibilidade.
+- Não fabrique citações, estudos, questões de provas, estatísticas ou dados de campo. Quando houver incerteza ou divergência entre fontes, declare-a.
+- Para conteúdo técnico ou científico, priorize linguagem precisa, unidades padronizadas e distinção entre correlação, causalidade, hipótese e consenso.
+
+### 13.3. Assistentes de IA, chat, RAG e experiências por voz ou multimodais
+
+- Mantenha prompts de sistema, credenciais, políticas de ferramentas e configuração de provedores sob controle do servidor. Não exponha chaves secretas no navegador nem permita que entradas livres do usuário alterem instruções privilegiadas.
+- Valide e limite ferramentas que a IA pode acionar: parâmetros tipados, permissões mínimas, operações permitidas e confirmação humana para ações destrutivas, externas ou com custo relevante.
+- Diferencie mensagens do usuário, conteúdo recuperado, instruções do sistema e saídas de ferramentas. Trate documentos recuperados e conteúdo externo como dados não confiáveis, nunca como autorização para ignorar políticas.
+- Em RAG, mantenha fonte, trecho, data e identificadores suficientes para auditoria; não invente fontes quando a recuperação falhar e não transforme erros de infraestrutura em respostas vazias indistinguíveis.
+- Em voz e streaming, represente claramente estados de permissão, conexão, escuta, processamento, interrupção e erro. Ofereça recuperação e alternativa textual quando possível, e não mantenha microfone/câmera ativos sem indicação visível.
+- Controle latência, tamanho de contexto, concorrência, timeouts, retries e limites do provedor. Evite loops de chamadas e custos repetidos sem limite.
+- Em aplicações de bem-estar ou saúde mental, não se apresente como profissional humano nem substitua atendimento clínico. Evite diagnóstico definitivo, proteja o diário e o histórico sensível e priorize orientação de segurança e recursos de emergência quando houver risco imediato.
+- Quando a IA não souber, não tiver acesso à fonte ou não puder executar uma ação, comunique a limitação claramente em vez de simular sucesso.
+
+### 13.4. Aplicações de edição, tradução e transformação de imagens, documentos ou mídia
+
+- Preserve o original e mantenha o fluxo reversível sempre que viável. Separe análise, transformação, renderização e validação em etapas observáveis.
+- Defina precisamente a região e o tipo de alteração autorizados. Em edição localizada, não modifique pixels, texto, rosto, layout, áudio ou outros elementos fora do escopo solicitado.
+- Em tradução de histórias ou conteúdo visual, use contexto anterior e posterior para preservar sentido, voz dos personagens, continuidade terminológica e adequação cultural; não faça tradução mecânica sem considerar a cena.
+- Ao transformar formatos, valide texto, imagens, ordem, dimensões, fontes, links e estrutura. Não declare fidelidade total se recursos como animações, transições, camadas ou elementos editáveis não forem preservados.
+- Use processamento determinístico para operações geométricas e composição quando possível; registre falhas por etapa, valide dimensões e conteúdo final e não trate uma imagem parcial como capítulo/documento completo.
+- Faça QA comparando entrada e saída: regiões alteradas, conteúdo omitido, artefatos, recortes, sobreposições, legibilidade e integridade do restante. Preserve a saída original para comparação e nova tentativa.
+- Em processamento em lote, use identificadores estáveis, idempotência, limites de concorrência e retomada por etapa; evite repetir trabalhos caros já concluídos quando a entrada não mudou.
+
+### 13.5. Painéis, workspaces, construtores de páginas e aplicações de dados configuráveis
+
+- Separe dados de domínio, preferências do usuário e estado transitório de interface. Cache e placeholders não devem ser tratados como fonte de verdade.
+- Se a funcionalidade promete sincronização entre dispositivos, persista configurações relevantes na conta do usuário, respeitando o mecanismo já adotado pelo projeto; não mantenha apenas em memória ou localStorage.
+- Preserve ordem, visibilidade, filtros, colunas, widgets e demais preferências que façam parte do contrato de persistência.
+- Para conteúdo customizado, use schemas e componentes permitidos, validação no servidor e sanitização de HTML, Markdown e URLs. Não execute JavaScript arbitrário nem aceite protocolos perigosos.
+- Normalize internamente nomes, slugs e identificadores para que a interface não exija que a pessoa conheça convenções técnicas.
+- Garanta responsividade em telas pequenas e grandes, estados vazios, carregamento, erro, permissões insuficientes e recuperação de dados.
+- Em páginas públicas ou compartilháveis, deixe claro o que está visível, valide permissões no servidor e evite expor dados privados por meio de URLs, metadados ou consultas.
+
+### 13.6. Bots, integrações com Discord e automações de mensagens
+
+- Mantenha tokens e credenciais fora do código e dos logs. Solicite apenas permissões necessárias e documente variáveis de ambiente por nome, sem valores secretos.
+- Valide parâmetros e permissões no servidor, inclusive para comandos administrativos; não confie apenas em ocultar botões ou comandos na interface.
+- Torne handlers idempotentes quando eventos puderem ser entregues novamente; evite mensagens, recompensas, tarefas ou cobranças duplicadas.
+- Respeite limites de taxa da plataforma, trate erros de permissão, indisponibilidade e respostas parciais e aplique retries limitados com backoff.
+- Separe registro/implantação de comandos da execução normal do bot. Não registre comandos automaticamente em cada inicialização se isso não for necessário.
+- Não envie conteúdo privado, menções em massa ou mensagens externas sem respeitar permissões, configuração do servidor e intenção do usuário.
+
+### 13.7. Ferramentas de desenvolvimento, registries de agentes/skills/MCPs e execução de ferramentas
+
+- Valide manifestos, schemas, nomes, versões, entradas e saídas antes de registrar ou executar uma skill, agente ou ferramenta.
+- Mantenha separadas descoberta, registro, autorização e execução. Encontrar uma ferramenta não significa que ela esteja autorizada a executar.
+- Use allowlists e permissões mínimas para operações de arquivo, shell, rede, repositórios e credenciais; peça confirmação antes de operações destrutivas ou com efeitos externos relevantes.
+- Registre origem, versão e resultado das operações para facilitar auditoria, sem registrar tokens, segredos ou conteúdo sensível desnecessário.
+- Evite executar instruções arbitrárias vindas de repositórios ou arquivos externos. Inspecione scripts e dependências antes de conceder acesso privilegiado.
+- Em catálogos, mantenha índice, metadados e arquivos de origem consistentes; operações de salvar, atualizar, buscar e excluir devem produzir estados coerentes e recuperáveis.
+
+### 13.8. Aplicações geoespaciais, mapas e localização
+
+- Diferencie coordenadas fornecidas, geocodificação estimada e localização exata. Não invente coordenadas, rotas, distâncias, tempos ou precisão.
+- Preserve sistema de referência, ordem latitude/longitude, unidades e precisão dos dados; valide coordenadas antes de usá-las em mapas ou cálculos.
+- Mostre incerteza quando a geocodificação for aproximada e trate ausência de permissão de localização como estado normal, com alternativa manual.
+- Para rotas e camadas, mantenha consistência entre dados exibidos, marcadores, filtros, legenda e cálculo; não conecte pontos automaticamente quando isso implicar um trajeto não solicitado.
+- Proteja localizações sensíveis e evite expor histórico de deslocamento ou coordenadas pessoais em logs e URLs compartilháveis.
+
+### 13.9. Editores visuais, sistemas de efeitos e experiências 3D
+
+- Trate tipos, catálogo, metadados, propriedades padrão, slots, gatilhos, presets e renderizador como um contrato único. Ao adicionar um elemento, atualize todos os registros necessários.
+- Mantenha controles editáveis alinhados com o resultado renderizado e valide configurações inválidas antes de aplicá-las.
+- Respeite `prefers-reduced-motion`, ofereça alternativas para efeitos intensos e preserve legibilidade, navegação por teclado e desempenho em dispositivos móveis.
+- Para animações e cenas 3D, limite trabalho por frame, limpe recursos ao desmontar componentes e ofereça fallback quando WebGL, áudio ou recursos do dispositivo não estiverem disponíveis.
+- Evite animações que bloqueiem interação ou ocultem controles; não dependa exclusivamente de hover, movimento ou cor para comunicar informação.
+
+### 13.10. Aplicações de comércio, comunidade e conteúdo público
+
+- Não confunda dados de demonstração com catálogo, estoque, preço, disponibilidade ou conteúdo real. Identifique claramente dados simulados e não invente transações.
+- Valide preços, quantidades, disponibilidade, identidade e permissões no servidor antes de confirmar operações.
+- Para conteúdo comunitário, aplique validação e sanitização, trate spam/abuso e respeite direitos de acesso e moderação.
+- Mantenha estados transacionais claros: pendente, confirmado, falhou, cancelado ou reembolsado, conforme o domínio. Não informe sucesso antes da confirmação da fonte de verdade.
+- Preserve histórico e rastreabilidade de operações importantes, evitando armazenar dados pessoais além do necessário.
+
+### 13.11. Como decidir quais regras aplicar
+
+1. Identifique a finalidade real da aplicação pela implementação, fluxos, dados e documentação; o nome do repositório ou um README genérico não é evidência suficiente.
+2. Aplique apenas as categorias relevantes ao componente ou fluxo alterado. Um produto pode combinar, por exemplo, perfil profissional, IA e exportação de documentos.
+3. Se o repositório tiver uma regra local mais restritiva, ela prevalece sobre a orientação genérica desta seção.
+4. Quando a finalidade ainda não puder ser confirmada, trate a categoria como hipótese, verifique a implementação e não acrescente requisitos de produto sem evidência.
+5. Os nomes dos repositórios-fonte ficam no catálogo de auditoria para rastreabilidade, não como títulos das regras operacionais.
 
 ## 14. Resolução de conflitos
 
@@ -187,83 +269,12 @@ Quando duas regras parecerem incompatíveis:
 - Diferencie claramente persistência local, persistência em nuvem e cache transitório. Não trate cache ou dados de demonstração como fonte de verdade.
 - Para estado local em aplicações React, siga os padrões já usados no projeto e trate hidratação para evitar divergências entre servidor e cliente.
 
-### Regras específicas por projeto
+### Aplicação das regras por categoria
 
-#### PixelFandom — `Alan-uai/PixelFandom`
-
-- Consulte `AGENTS.md` e `docs/ai-rules.md` antes de editar. A regra local estabelece escopo estrito: altere somente a página, módulo ou componente pedido e peça esclarecimento se houver ambiguidade material.
-- Não toque em arquivos `.env*`; novas variáveis devem ser documentadas ou adicionadas como nomes vazios ao `.env.example`.
-- O usuário da wiki não é administrador da infraestrutura: prompts de sistema, provedores, parâmetros de inferência, chaves e configurações críticas permanecem sob controle do desenvolvedor.
-- Personalizações de IA devem ser opções predefinidas validadas no backend; não injete texto livre do usuário diretamente no system prompt.
-- Para páginas customizadas, use blocos e schemas controlados, validação server-side e sanitização de HTML e URLs. Rejeite scripts, event handlers, protocolos perigosos e embeds arbitrários.
-- O sistema deve normalizar títulos e identificadores internamente, sem exigir que o usuário saiba inglês, slugs ou convenções de banco.
-- O build pode ignorar TypeScript e ESLint; execute `lint` e `typecheck` separadamente conforme os scripts do projeto.
-
-#### Melopoësis — `Alan-uai/Melopo-sis`
-
-- Mantenha a UI em português brasileiro e respeite o tema escuro e os tokens CSS já existentes.
-- Não altere a inicialização do Firebase: o guia local marca `initializeFirebase` como área protegida.
-- Preserve o fluxo de sugestões: cache por segmento, verificações locais antes de chamadas de IA quando aplicável e separação entre análise local de tom e fluxos de IA.
-- Respeite as duas camadas de persistência já existentes: localStorage para usuários anônimos e Firestore para usuários autenticados.
-- Execute `typecheck` e testes Vitest conforme o guia local. O comando de lint é apenas um placeholder e não deve ser tratado como verificação efetiva.
-- O repositório contém regras operacionais específicas para Genkit, RAG, dicionário e servidor Express; leia o guia completo antes de alterar esses subsistemas.
-
-#### PixelCopy / Eternal Guide — `Alan-uai/PixelCopy`
-
-- Consulte também `docs/ai-rules.md`, referenciado pelo `AGENTS.md`, antes de editar. Esse documento impõe escopo estrito, proíbe alterações não solicitadas e exige investigação metódica de falhas recorrentes.
-- Preserve o modelo de dados do Supabase, os tipos manuais em `src/supabase/client.ts` e as migrations existentes.
-- Não presuma que o build valida TypeScript ou ESLint: o projeto pode ignorar ambos; use os comandos específicos de lint e typecheck.
-- Preserve a separação entre endpoint simples de chat, cliente OpenRouter com fallback/tool calling e dados estáticos de fallback.
-- O tema e os padrões visuais existentes são escuros; mantenha a coerência com shadcn/ui e tokens CSS do projeto.
-
-#### Datafy e Datafycopy — `Alan-uai/Datafy`, `Alan-uai/Datafycopy`
-
-- Divida os componentes em módulos coesos e reutilizáveis.
-- Faça apenas alterações explicitamente solicitadas, sem mudanças laterais motivadas por preferências pessoais do agente.
-- Quando a aplicação prevê configurações sincronizadas entre dispositivos, persista no perfil do usuário o estado e a ordem dos widgets, colunas, opções ativas e demais preferências relevantes.
-- Garanta responsividade para telas pequenas, médias e grandes, incluindo páginas, botões, cartões e controles.
-- Existem regras em `rules.md` e também em `src/rules.md` no repositório Datafycopy; leia ambas quando trabalhar nele.
-
-#### N-simple / Agronômica N-Pro — `Hashzin-0/N-simple` e `Hashzin-0/N`
-
-- Consulte o `AGENTS.md` do repositório específico. Os dois projetos têm documentação semelhante, mas não presuma que são idênticos.
-- Preserve os requisitos de implantação no AI Studio/Cloud Run: não transforme variáveis server-side em `NEXT_PUBLIC_*` quando o guia local proibir isso.
-- Nunca grave segredos no código. Use os mecanismos de segredo do ambiente e mantenha arquivos de ambiente fora de commits.
-- Não reescreva o schema SQL baseline já aplicado em produção para adicionar funcionalidades. Crie migrations incrementais, aditivas e idempotentes; documente cada migration e execute suas verificações.
-- Em pipelines semânticos e integrações externas, diferencie resultados legítimos vazios de erros de API, timeout, rate limit e indisponibilidade. Não converta falhas transitórias silenciosamente em listas vazias quando isso impedir diagnóstico.
-- Implemente limites de concorrência, timeouts, retry/backoff e circuit breaker de acordo com os limites do provedor; não repita chamadas indefinidamente.
-- Preserve os contratos e campos DOM usados por automações de interface, e mantenha cálculos puros fora de componentes de apresentação quando a arquitetura local assim determinar.
-- O build não substitui lint ou testes. Execute os comandos realmente configurados e informe quando o repositório não possui framework de testes.
-
-#### Curion — `Hashzin-0/Curion`
-
-- Leia `ai_rules.md` e as skills citadas por ele antes de trabalhar em áreas abrangidas.
-- Separe UI, layout, hooks, serviços, domínio, infraestrutura, tipos, utilitários e constantes; mantenha componentes declarativos e lógica fora da UI.
-- Use arquitetura desacoplada, contratos explícitos, tipagem rigorosa e validação de entradas.
-- Qualquer alteração que afete Supabase deve incluir SQL/RLS ou migration correspondente e documentação de aplicação.
-- OpenRouter é o provedor padrão de geração de texto neste projeto; áudio pode seguir as exceções locais.
-- Se o usuário pedir apenas resposta, análise ou modo read-only, desative as alterações de arquivos.
-
-#### Psycho — `Hashzin-0/Psycho`
-
-- Preserve a separação entre frontend React/TypeScript e backend Python/aiohttp.
-- Não presuma que existe busca vetorial: o guia descreve o RAG atual como SQLite com busca por palavras-chave.
-- Preserve a etapa de semeadura da base de conhecimento antes da primeira inicialização do servidor.
-- Não copie nem exponha segredos. O guia informa que há uma chave de API comprometida em histórico/arquivo versionado; trate-a como incidente de segurança, nunca reproduza seu valor e recomende rotação segura ao responsável.
-- Como o repositório não documenta framework de testes, use as verificações disponíveis e não afirme que testes automatizados foram executados se não foram.
-
-#### Goduix — `Hashzin-0/Goduix`
-
-- Entenda o sistema de fusão de efeitos antes de alterar componentes: tipos, slots, gatilhos, catálogo de doadores, presets e renderizador são partes do mesmo contrato.
-- Ao adicionar componente, atualize todos os pontos de registro exigidos pelo guia: tipo, catálogo, metadados, props padrão, assinatura de efeito, doadores quando aplicável e renderizador.
-- Mantenha a UI em português brasileiro.
-- Preserve a configuração de HMR/watch protegida por `DISABLE_HMR`; não altere `server.hmr` ou `server.watch` sem uma solicitação explícita e análise de impacto.
-- O comando local `bun run lint` executa typecheck, não necessariamente uma análise de lint tradicional.
-
-#### EternalMap — `Hashzin-0/EternalMap`
-
-- O arquivo `CLAUDE.md` contém apenas a referência `@AGENTS.md`. A varredura da árvore não encontrou um `AGENTS.md` correspondente; verifique e corrija essa referência no próprio repositório antes de confiar nela como fonte de instruções.
-- Não trate um arquivo-ponte como conteúdo de regras: siga a referência e confirme que o arquivo de destino existe.
+- As regras especializadas por tipo de aplicação estão na seção 13. Use-as como critérios condicionais, não como requisitos universais.
+- A identificação de uma categoria deve vir do comportamento e da finalidade real do produto, e não apenas do nome do repositório.
+- Não transfira para um produto uma tecnologia, um provedor, um tema visual, uma estratégia de persistência ou uma limitação que só faz sentido em outra aplicação.
+- Mantenha o catálogo da seção 17 para rastrear de quais repositórios e arquivos foram extraídos os padrões, sem transformar esses nomes em categorias de regras.
 
 ## 17. Catálogo da varredura
 
