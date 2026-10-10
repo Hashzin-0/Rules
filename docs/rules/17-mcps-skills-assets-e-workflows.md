@@ -68,14 +68,14 @@ Não coloque dados reais de clientes, documentos privados ou credenciais em fixt
 
 ## Workflow de implementação
 
-1. **Descoberta:** leia Rules.md, instruções locais, package manifests, schemas e arquitetura existente.
-2. **Classificação:** associe a tarefa às regras gerais e às categorias confirmadas.
-3. **Planejamento:** declare escopo, riscos, contratos, integrações e critérios de aceite.
-4. **Pesquisa:** verifique APIs e versões nas fontes oficiais e nos docs locais instalados.
-5. **Implementação:** mudanças mínimas, modularizadas e reversíveis.
-6. **Validação:** testes direcionados, lint, typecheck, build e E2E conforme risco.
-7. **Revisão:** diff, segredos, migrações, acessibilidade, logs e dependências.
-8. **Entrega:** arquivos alterados, comandos realmente executados, resultados, limitações e follow-up.
+1. Descoberta: leia Rules.md, instruções locais, package manifests, schemas e arquitetura existente.
+2. Classificação: associe a tarefa às regras gerais e às categorias confirmadas.
+3. Planejamento: declare escopo, riscos, contratos, integrações e critérios de aceite.
+4. Pesquisa: verifique APIs e versões nas fontes oficiais e nos docs locais instalados.
+5. Implementação: mudanças mínimas, modularizadas e reversíveis.
+6. Validação: testes direcionados, lint, typecheck, build e E2E conforme risco.
+7. Revisão: diff, segredos, migrações, acessibilidade, logs e dependências.
+8. Entrega: arquivos alterados, comandos realmente executados, resultados, limitações e follow-up.
 
 ## Confirmação humana
 
@@ -89,3 +89,10 @@ Exija confirmação explícita antes de operações destrutivas, exposição pú
 - [ ] Assets e código de terceiros têm licença revisada.
 - [ ] Resultados verificados e não exagerados.
 - [ ] Nenhum segredo em arquivos, prompts, logs ou screenshots.
+
+## Referências
+
+- https://modelcontextprotocol.io/
+- https://github.com/modelcontextprotocol
+- https://docs.github.com/en/actions
+- https://www.figma.com/developers/api
