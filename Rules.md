@@ -357,3 +357,12 @@ A expressão “sem arquivos-alvo encontrados” significa que nenhum arquivo co
 - [ ] Não afirmei que todo o código-fonte foi revisado linha a linha.
 
 **Limitações remanescentes:** não foram auditadas branches não padrão, arquivos externos ou instruções com nomes não contemplados na busca. A varredura focou em nomes de arquivos de regras e na leitura dos documentos localizados, não em uma revisão de todo o código-fonte. Antes de editar qualquer projeto, reabra a fonte local atual, pois os arquivos podem mudar após esta compilação.
+
+
+## 14. Guias técnicos detalhados
+
+Este arquivo continua sendo a referência normativa transversal. Para matrizes de tecnologias, critérios de escolha, APIs públicas, nomes de variáveis, exemplos reutilizáveis, MCPs, Skills, assets e scripts de validação, consulte o [índice dos guias detalhados](docs/rules/README.md).
+
+Os guias complementam as regras; não substituem instruções locais nem autorizam instalar tecnologias sem necessidade. Modelos, versões, limites, preços, APIs e variáveis devem ser confirmados na documentação oficial da integração realmente escolhida. Exemplos documentados não devem ser apresentados como testes executados.
+
+Antes de usar uma tecnologia, leia o guia da regra correspondente e a documentação oficial da versão instalada. Aplique apenas os controles pertinentes ao produto, preserve os arquivos .env* existentes e não exponha segredos. Para validar a estrutura dos guias, execute node scripts/validate-rules-docs.mjs no repositório; informe o resultado real da execução.
