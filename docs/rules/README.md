@@ -35,6 +35,7 @@ Fonte normativa: [Rules.md](../../Rules.md). Estes guias ampliam a aplicação p
 - [16 — Blueprints reutilizáveis](16-blueprints-reutilizaveis.md)
 - [17 — MCPs, Skills, assets e workflows](17-mcps-skills-assets-e-workflows.md)
 - [18 — Testes, validação e CI](18-plano-de-testes-e-ci.md)
+- [19 — Modelos de IA e avaliação](19-modelos-e-avaliacao.md)
 
 ## Como usar
 
