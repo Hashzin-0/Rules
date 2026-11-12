@@ -19,6 +19,7 @@ Fonte normativa: [Rules.md](../../Rules.md). Estes guias ampliam a aplicação p
 - [13.1 — Currículos e portfólios](13-01-curriculos-portfolios.md)
 - [13.2 — Educação e pesquisa científica](13-02-educacao-pesquisa-cientifica.md)
 - [13.3 — IA, RAG, voz e multimodalidade](13-03-ia-rag-voz-multimodal.md)
+- [13.3A — Gemini Live: integração, Function Calling e executor seguro](13-03a-gemini-live-executor-seguro.md)
 - [13.4 — Transformação de mídia e documentos](13-04-transformacao-midia-documentos.md)
 - [13.5 — Dashboards e workspaces](13-05-dashboards-workspaces.md)
 - [13.6 — Bots e automações](13-06-bots-automacoes.md)
