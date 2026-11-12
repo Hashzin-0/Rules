@@ -39,6 +39,7 @@ const requiredGuideFiles = [
   "18-plano-de-testes-e-ci.md",
   "19-modelos-e-avaliacao.md",
   "20-testes-do-validador.md",
+  "21-blueprint-http-testavel.md",
 ];
 
 async function createFixture() {
@@ -64,7 +65,7 @@ test("accepts a complete documentation fixture", async (t) => {
   t.after(() => rm(fixture.root, { recursive: true, force: true }));
   const result = runValidator(fixture.root);
   assert.equal(result.status, 0, result.stderr || result.stdout);
-  assert.match(result.stdout, /Validated 30 Markdown files/);
+  assert.match(result.stdout, /Validated 31 Markdown files/);
 });
 
 test("reports a missing required guide", async (t) => {
